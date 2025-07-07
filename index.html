@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphic Design Services - Pricing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        /* Importing Fonts for a modern, bold look */
+        /* These are already linked above, so no @import necessary here */
+
+        /* Basic Reset & Body Styling */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif; /* A good readable font for content */
+            background-color: #000; /* Solid black background like the image */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Full viewport height */
+            padding: 20px; /* Padding around the main container */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+            overflow-x: hidden; /* Prevent horizontal scroll from layout shifts */
+        }
+
+        .pricing-container {
+            background-color: #000; /* Inner background is also black for content */
+            color: #fff;
+            width: 100%;
+            max-width: 800px; /* Max width for the main content area */
+            border-radius: 12px; /* Slightly rounded corners for the whole container */
+            overflow: hidden; /* Ensures grid lines don't spill */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1); /* Subtle dark shadow + thin border */
+            position: relative; /* For the grid background */
+        }
+
+        /* Window Bar - Top (inspired by image_dd372c.png) */
+        .window-bar {
+            background-color: #2c2c2c; /* Darker gray for the bar */
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .window-bar .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .window-bar .red { background-color: #FF5F56; } /* Red */
+        .window-bar .yellow { background-color: #FFBD2E; } /* Yellow */
+        .window-bar .green { background-color: #27C93F; } /* Green */
+
+        /* Grid Background (inspired by image_dd372c.png) */
+        .grid-background {
+            background-color: #000; /* Base background for the content area */
+            padding: 30px; /* Internal padding */
+            position: relative;
+            z-index: 1; /* Ensure content is above grid lines */
+        }
+
+        .grid-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 25px 25px; /* Size of each grid square */
+            z-index: -1; /* Place behind content */
+        }
+
+        /* Main Title */
+        .main-title {
+            font-family: 'Montserrat', sans-serif; /* Bold font for main title */
+            font-size: 2.5em; /* Large text */
+            text-align: center;
+            color: #fff;
+            line-height: 1.2;
+            margin-top: 0;
+            margin-bottom: 40px;
+            letter-spacing: 2px; /* Slight spacing for impact */
+        }
+
+        /* Price Table Wrapper (the core "chart" section) */
+        .price-table-wrapper {
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Outer border for the table part */
+            border-radius: 8px; /* Slightly rounded corners for the table */
+            overflow: hidden; /* Important for header corners */
+            margin-bottom: 20px;
+        }
+
+        /* Table Header */
+        .table-header {
+            display: flex;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.1em;
+        }
+
+        .header-cell {
+            flex: 1;
+            padding: 15px 20px;
+            text-align: center;
+            color: #000; /* Black text on colored headers */
+        }
+
+        .service-header {
+            background-color: #FF69B4; /* Pink for service header (similar to image) */
+        }
+
+        .price-header {
+            background-color: #4FB0E0; /* Blue for price header (similar to image) */
+        }
+
+        /* Price List Items */
+        .price-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background-color: #1a1a1a; /* Slightly lighter black for the list background */
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            background-color: #2a2a2a; /* Darker background for category titles */
+            padding: 12px 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.05em;
+            color: #BB86FC; /* Accent color for categories */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separator */
+            border-top: 1px solid rgba(255, 255, 255, 0.1); /* Separator */
+            margin-top: -1px; /* Overlap borders */
+        }
+
+        .category-icon {
+            font-size: 1.2em;
+            margin-right: 8px;
+            color: #03DAC6; /* Secondary accent for icons */
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Lighter separator for items */
+        }
+
+        .price-item:last-child {
+            border-bottom: none; /* No border on the last item */
+        }
+
+        .service-name {
+            flex: 1;
+            text-align: left;
+            color: #E0E0E0; /* Light gray for service names */
+            font-size: 0.95em;
+        }
+
+        .price-value {
+            text-align: right;
+            font-weight: 600;
+            color: #F8F8F8; /* Brighter white for prices */
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1em;
+            min-width: 90px; /* Ensure price column has minimum width */
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            font-size: 0.85em;
+            color: #aaa;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* --- Mobile Responsiveness --- */
+
+        /* Small screens (e.g., phones in portrait) */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px; /* Less padding around the whole container */
+            }
+
+            .pricing-container {
+                border-radius: 0; /* Remove border-radius on container for full-width feel */
+                box-shadow: none; /* Remove box-shadow to blend with body */
+            }
+
+            .window-bar {
+                border-radius: 0; /* Match container */
+            }
+
+            .grid-background {
+                padding: 20px 15px; /* Reduced padding on sides */
+            }
+
+            .main-title {
+                font-size: 2em; /* Smaller font size for main title */
+                margin-bottom: 30px;
+                letter-spacing: 1px; /* Reduce letter spacing */
+            }
+
+            .header-cell {
+                padding: 12px 10px; /* Reduced padding for header cells */
+                font-size: 0.9em; /* Smaller header font */
+            }
+
+            .category-title {
+                padding: 10px 15px;
+                font-size: 0.95em;
+            }
+
+            .category-icon {
+                font-size: 1em; /* Smaller icon */
+            }
+
+            .price-item {
+                /* Stack service name and price vertically */
+                flex-direction: column;
+                align-items: flex-start; /* Align text to the left */
+                padding: 10px 15px; /* Slightly reduced padding */
+            }
+
+            .service-name {
+                font-size: 0.9em; /* Smaller service name font */
+                margin-bottom: 4px; /* Small space between stacked items */
+            }
+
+            .price-value {
+                font-size: 0.95em; /* Slightly smaller price font */
+                min-width: auto; /* Remove min-width to allow full flexibility */
+                width: 100%; /* Take full available width */
+                text-align: left; /* Align price to the left when stacked */
+            }
+
+            .disclaimer {
+                font-size: 0.8em; /* Smaller disclaimer font */
+                padding: 0 10px; /* Add some horizontal padding */
+            }
+        }
+
+        /* Larger phones/small tablets (landscape or slightly larger devices) */
+        @media (min-width: 601px) and (max-width: 800px) {
+            .main-title {
+                font-size: 2.2em;
+            }
+
+            .header-cell {
+                font-size: 1em;
+            }
+
+            .price-item {
+                padding: 12px 20px;
+            }
+
+            .service-name {
+                font-size: 0.92em;
+            }
+
+            .price-value {
+                font-size: 0.98em;
+            }
+        }
+    </style>
+    </head>
+<body class="dark-grid-theme">
+
+    <div class="pricing-container">
+        <div class="window-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+        </div>
+
+        <div class="grid-background">
+            <h1 class="main-title">GRAPHIC DESIGN<br>PRICING LIST</h1>
+
+            <div class="price-table-wrapper">
+                <div class="table-header">
+                    <div class="header-cell service-header">Graphic design service</div>
+                    <div class="header-cell price-header">Price per unit</div>
+                </div>
+
+                <ul class="price-list">
+                    <li class="category-title">
+                        <span class="material-icons category-icon">web</span> Web Graphics
+                    </li>
+                    <li class="price-item">
+                        <span class="service-name">Social Media Post & Ads</span>
+                        <span class="price-value">500৳</span>
+                    </li>
+                    <li class="price-item">
+                        <span class="service-name">Web Banner</span>
+                        <span class="price-value">1,000৳</span>
+                    </li>
+
+                    <li class="category-title">
+                        <span class="material-icons category-icon">print</span> Print Graphics
+                    </li>
+                    <li class="price-item">
+                        <span class="service-name">Brochure Design (Bi-fold)</span>
+                        <span class="price-value">2,500৳</span>
+                    </li>
+                    <li class="price-item">
+                        <span class="service-name">Brochure Design (Tri-fold)</span>
+                        <span class="price-value">3,500৳</span>
+                    </li>
+                    <li class="price-item">
+                        <span class="service-name">Poster (A4 size)</span>
+                        <span class="price-value">1,000৳</span>
+                    </li>
+                    <li class="price-item">
+                        <span class="service-name">Banner</span>
+                        <span class="price-value">2,000৳</span>
+                    </li>
+                    <li class="price-item">
+                        <span class="service-name">Logo Design</span>
+                        <span class="price-value">3,500৳</span>
+                    </li>
+                    <li class="price-item">
+                        <span class="service-name">Business Card & ID Card</span>
+                        <span class="price-value">500৳</span>
+                    </li>
+
+                    <li class="category-title">
+                        <span class="material-icons category-icon">movie_filter</span> Motion Video
+                    </li>
+                    <li class="price-item">
+                        <span class="service-name">Social Media Post Motion Graphics (10 sec)</span>
+                        <span class="price-value">1,500৳</span>
+                    </li>
+                    <li class="price-item">
+                        <span class="service-name">Social Media Post Motion Graphics (20 sec)</span>
+                        <span class="price-value">2,500৳</span>
+                    </li>
+                    <li class="price-item">
+                        <span class="service-name">Social Media Post Motion Graphics (30 sec)</span>
+                        <span class="price-value">3,500৳</span>
+                    </li>
+                </ul>
+            </div>
+            <p class="disclaimer">*All prices are per unit and may vary based on complexity and specific requirements.</p>
+        </div>
+    </div>
+
+    <script>
+        // No specific JavaScript was added in the previous version for this static price list
+        // beyond optional MDC-Web initialization or a theme toggle.
+        // Since we're going for a single, self-contained file with no external MDC-Web,
+        // and no complex interactive elements were requested for this specific "chart" display,
+        // this script block can remain empty or contain simple, self-contained logic if needed.
+
+        // If you were using MDC-Web or other libraries via CDN, you'd paste their JS here.
+        // For example, if you wanted the ripple effect on elements if you had buttons:
+        // mdc.autoInit(); // This would require the MDC-Web JS library to be included here too.
+        // (which for a truly single file, would mean copying its minified code here, making the file huge)
+
+        // For this specific design, no active JS is strictly necessary.
+    </script>
+    </body>
+</html>
